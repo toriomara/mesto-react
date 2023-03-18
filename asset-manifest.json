@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/github.io/mesto-react/static/css/main.25b6d321.css",
-    "main.js": "/github.io/mesto-react/static/js/main.d2255726.js",
+    "main.js": "/github.io/mesto-react/static/js/main.d3c51c13.js",
     "static/js/787.5530211c.chunk.js": "/github.io/mesto-react/static/js/787.5530211c.chunk.js",
     "static/media/Inter-Medium.woff": "/github.io/mesto-react/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
     "static/media/Inter-Black.woff": "/github.io/mesto-react/static/media/Inter-Black.c6938660eec019fefd68.woff",
@@ -20,11 +20,11 @@
     "static/media/close-button.svg": "/github.io/mesto-react/static/media/close-button.039f1f5203f653b4bacd.svg",
     "static/media/save-button.svg": "/github.io/mesto-react/static/media/save-button.30c5deccce076da467ca.svg",
     "main.25b6d321.css.map": "/github.io/mesto-react/static/css/main.25b6d321.css.map",
-    "main.d2255726.js.map": "/github.io/mesto-react/static/js/main.d2255726.js.map",
+    "main.d3c51c13.js.map": "/github.io/mesto-react/static/js/main.d3c51c13.js.map",
     "787.5530211c.chunk.js.map": "/github.io/mesto-react/static/js/787.5530211c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.25b6d321.css",
-    "static/js/main.d2255726.js"
+    "static/js/main.d3c51c13.js"
   ]
 }
