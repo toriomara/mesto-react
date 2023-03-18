@@ -15,12 +15,6 @@ export const ImagePopup = (props) => {
           <img
             className='image-container__image'
             alt={card.name}
-            // src={card.link}
-            // Если использовыть строчку выше появляется ошибка — Invalid value for
-            // prop `src` on <img> tag. Either remove it from the element, or pass
-            // a string or number value to keep it in the DOM...
-
-            // Погуглил и нашёл решение на stack overflow
             src={card ? card.link : ''}
           />
           <figcaption className='image-container__caption'>
