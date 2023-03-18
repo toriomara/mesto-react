@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/toriomara/mesto-react/static/css/main.1c1e6bab.css",
+    "main.js": "/toriomara/mesto-react/static/js/main.27b70469.js",
+    "static/js/787.5530211c.chunk.js": "/toriomara/mesto-react/static/js/787.5530211c.chunk.js",
+    "static/media/Inter-Medium.woff": "/toriomara/mesto-react/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
+    "static/media/Inter-Black.woff": "/toriomara/mesto-react/static/media/Inter-Black.c6938660eec019fefd68.woff",
+    "static/media/Inter-Regular.woff": "/toriomara/mesto-react/static/media/Inter-Regular.8c206db99195777c6769.woff",
+    "static/media/Inter-Black.woff2": "/toriomara/mesto-react/static/media/Inter-Black.15ca31c0a2a68f76d2d1.woff2",
+    "static/media/Inter-Regular.woff2": "/toriomara/mesto-react/static/media/Inter-Regular.c8ba52b05a9ef10f4758.woff2",
+    "static/media/logo.svg": "/toriomara/mesto-react/static/media/logo.03b78ada3425e9132ff3db7ea8f4a6f6.svg",
+    "static/media/card-button.svg": "/toriomara/mesto-react/static/media/card-button.c41952e8539a0401ae99.svg",
+    "index.html": "/toriomara/mesto-react/index.html",
+    "static/media/trash-button.svg": "/toriomara/mesto-react/static/media/trash-button.823b0cf1b0b7e9cb7cad.svg",
+    "static/media/card-button_active.svg": "/toriomara/mesto-react/static/media/card-button_active.fe17a515669479b1e649.svg",
+    "static/media/addButtonMobile.svg": "/toriomara/mesto-react/static/media/addButtonMobile.6f86ece55e54220c5485.svg",
+    "static/media/addButton.svg": "/toriomara/mesto-react/static/media/addButton.6f41966c71dd7895857f.svg",
+    "static/media/edit-button.svg": "/toriomara/mesto-react/static/media/edit-button.a1892ea72cb87c8fc3aa.svg",
+    "static/media/edit-avatar-button.svg": "/toriomara/mesto-react/static/media/edit-avatar-button.a086f758840ae814ecde.svg",
+    "static/media/close-button.svg": "/toriomara/mesto-react/static/media/close-button.2ceb783afbab75916ddc.svg",
+    "static/media/save-button.svg": "/toriomara/mesto-react/static/media/save-button.f3211f454db9359a171c.svg",
+    "main.1c1e6bab.css.map": "/toriomara/mesto-react/static/css/main.1c1e6bab.css.map",
+    "main.27b70469.js.map": "/toriomara/mesto-react/static/js/main.27b70469.js.map",
+    "787.5530211c.chunk.js.map": "/toriomara/mesto-react/static/js/787.5530211c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1c1e6bab.css",
+    "static/js/main.27b70469.js"
+  ]
+}
