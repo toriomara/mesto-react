@@ -1,25 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { api } from '../utils/api';
+import React, { useContext } from 'react';
 import { Card } from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 export const Main = (props) => {
-  const { onEditAvatar, onEditProfile, onAddPlace, onCardClick } = props;
+  const {
+    cards,
+    onEditAvatar,
+    onEditProfile,
+    onAddPlace,
+    onCardClick,
+    onCardLike,
+    onCardDelete,
+  } = props;
 
-  const [userName, setUserName] = useState('');
-  const [userDescription, setuserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then(([userData, cards]) => {
-        setUserName(userData.name);
-        setuserDescription(userData.about);
-        setUserAvatar(userData.avatar);
-        setCards(cards);
-      })
-      .catch((err) => console.log(`Ошибка: ${err}`));
-  }, []);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className='content'>
@@ -30,7 +24,11 @@ export const Main = (props) => {
             className='profile__avatar-container'
             // style={{ backgroundImage: `url(${userAvatar})` }}
           >
-            <img className='profile__avatar' src={userAvatar} alt='Аватар' />
+            <img
+              className='profile__avatar'
+              src={currentUser.avatar}
+              alt='Аватар'
+            />
             <button
               className='profile__avatar-edit-button'
               type='button'
@@ -40,7 +38,7 @@ export const Main = (props) => {
           </div>
           <div className='profile__info'>
             <div className='profile__info-wrapper'>
-              <h1 className='profile__name'>{userName}</h1>
+              <h1 className='profile__name'>{currentUser.name}</h1>
               <button
                 className='profile__edit-button'
                 type='button'
@@ -48,7 +46,7 @@ export const Main = (props) => {
                 onClick={onEditProfile}
               ></button>
             </div>
-            <p className='profile__job'>{userDescription}</p>
+            <p className='profile__job'>{currentUser.about}</p>
           </div>
         </div>
         <button
@@ -61,7 +59,13 @@ export const Main = (props) => {
       {/* Cards */}
       <section className='cards' id='cards'>
         {cards.map((item) => (
-          <Card key={item._id} card={item} onCardClick={onCardClick} />
+          <Card
+            key={item._id}
+            card={item}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
+          />
         ))}
       </section>
     </main>

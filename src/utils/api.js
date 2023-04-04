@@ -30,26 +30,17 @@ class Api {
     });
   }
 
-  removeCard(card) {
-    this._cardId = card.cardId;
-    return this._request(`${this._baseUrl}cards/${this._cardId}`, {
+  removeCard(cardId) {
+    return this._request(`${this._baseUrl}cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers,
     });
   }
 
-  addLikeCard(card) {
-    this._cardId = card.cardId;
-    return this._request(`${this._baseUrl}cards/likes/${this._cardId}`, {
-      method: 'PUT',
-      headers: this._headers,
-    });
-  }
-
-  removeLikeCard(card) {
-    this._cardId = card.cardId;
-    return this._request(`${this._baseUrl}cards/likes/${this._cardId}`, {
-      method: 'DELETE',
+  changeLikeCardStatus(cardId, isLiked) {
+    const methodToggle = !isLiked ? 'DELETE' : 'PUT';
+    return this._request(`${this._baseUrl}cards/likes/${cardId}`, {
+      method: methodToggle,
       headers: this._headers,
     });
   }
@@ -60,13 +51,6 @@ class Api {
       headers: this._headers,
     });
   }
-
-  // getUserInfo() {
-  //   return fetch(`${this._baseUrl}users/me`, {
-  //     method: 'GET',
-  //     headers: this._headers,
-  //   }).then(this._getResponse);
-  // }
 
   setUserInfo({ name, about }) {
     return this._request(`${this._baseUrl}users/me`, {
@@ -83,7 +67,7 @@ class Api {
     return this._request(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({ avatar }),
+      body: JSON.stringify(avatar),
     });
   }
 }
