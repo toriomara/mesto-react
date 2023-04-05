@@ -17,11 +17,8 @@ const App = () => {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isConfirmDeletePopupOpen, setIsConfirmDeletePopupOpen] =
     useState(false);
-  const [isSaving, setIsSaving] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
-  const [selectedDelete, setSelectedDelete] = useState('');
-
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
 
@@ -33,9 +30,6 @@ const App = () => {
       })
       .catch((err) => console.log(`Ошибка: ${err}`));
   }, []);
-
-  const saveButton = isSaving ? 'Сохранение...' : 'Сохранить';
-  const deleteButton = isDeleting ? 'Удаление...' : 'Да';
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(true);
@@ -66,62 +60,79 @@ const App = () => {
   };
 
   const handleUpdateUser = (userData) => {
+    setIsLoading(true);
     api
       .setUserInfo(userData)
-      .then((res) => setCurrentUser(res))
-      .finally(() => setIsSaving(true))
-      .catch((err) => console.log(`Ошибка: ${err}`));
-    closeAllPopups();
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`))
+      .finally(() => setIsLoading(false));
   };
 
   const handleUpdateAvatar = (avatar) => {
+    setIsLoading(true);
     api
       .setUserAvatar(avatar)
-      .then((res) => setCurrentUser(res))
-      .finally(() => setIsSaving(true))
-      .catch((err) => console.log(`Ошибка: ${err}`));
-    closeAllPopups();
+      .then((res) => {
+        setCurrentUser(res);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(`Ошибка: ${err}`))
+      .finally(() => setIsLoading(true));
   };
 
   const handleAddPlaceSubmit = ({ name, link }) => {
+    setIsLoading(true);
     api
       .addCard({ name, link })
-      .then((res) => setCards([res, ...cards]))
+      .then((res) => {
+        setCards([res, ...cards]);
+        closeAllPopups();
+      })
       .catch((err) => console.log(`Ошибка: ${err}`))
-      .finally(() => setIsSaving(true));
-    closeAllPopups();
+      .finally(() => setIsLoading(false));
   };
 
   const handleCardDelete = (card) => {
     setIsConfirmDeletePopupOpen(true);
-    setSelectedDelete(card);
+    setSelectedCard(card);
   };
 
   const handleConfirmDelete = () => {
+    setIsLoading(true);
     api
-      .removeCard(selectedDelete._id)
+      .removeCard(selectedCard._id)
       .then(() => {
-        setCards(cards.filter((card) => selectedDelete._id !== card._id));
+        setCards(cards.filter((card) => selectedCard._id !== card._id));
         closeAllPopups();
       })
       .catch((err) => console.log(`Ошибка: ${err}`))
-      .finally(() => setIsDeleting(true));
+      .finally(() => setIsLoading(false));
   };
 
-  const handleEscOverlayClose = (e) => {
-    if (e.key === 'Escape' || e.target.classList.contains('popup')) {
-      closeAllPopups();
-    }
-  };
+  const isOpen =
+    isEditAvatarPopupOpen ||
+    isEditProfilePopupOpen ||
+    isAddPlacePopupOpen ||
+    selectedCard;
 
   useEffect(() => {
-    document.addEventListener('keydown', handleEscOverlayClose);
-    document.addEventListener('mousedown', handleEscOverlayClose);
-    return () => {
-      document.removeEventListener('keydown', handleEscOverlayClose);
-      document.removeEventListener('mousedown', handleEscOverlayClose);
-    };
-  });
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape' || evt.target.classList.contains('popup')) {
+        closeAllPopups();
+      }
+    }
+    if (isOpen) {
+      document.addEventListener('keydown', closeByEscape);
+      document.addEventListener('mouseup', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+        document.removeEventListener('mouseup', closeByEscape);
+      };
+    }
+  }, [isOpen]);
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
@@ -149,25 +160,29 @@ const App = () => {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
-          btn={saveButton}
+          // btn={saveButton}
+          isLoading={isLoading}
         />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
-          btn={saveButton}
+          // btn={saveButton}
+          isLoading={isLoading}
         />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
-          btn={saveButton}
+          // btn={saveButton}
+          isLoading={isLoading}
         />
         <ConfirmDeletePopup
           isOpen={isConfirmDeletePopupOpen}
           onClose={closeAllPopups}
           onCardDelete={handleConfirmDelete}
-          btn={deleteButton}
+          // btn={deleteButton}
+          isLoading={isLoading}
         />
         <ImagePopup onClose={closeAllPopups} card={selectedCard} />
       </div>

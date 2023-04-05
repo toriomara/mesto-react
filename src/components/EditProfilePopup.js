@@ -3,16 +3,16 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import { PopupWithForm } from './PopupWithForm';
 
 export const EditProfilePopup = (props) => {
-  const { isOpen, onClose, onUpdateUser, btn } = props;
+  const { isOpen, onClose, onUpdateUser, isLoading } = props;
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
   const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
-  }, [currentUser]);
+    setName(currentUser.name || '');
+    setDescription(currentUser.about || '');
+  }, [currentUser, isOpen]);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -34,7 +34,9 @@ export const EditProfilePopup = (props) => {
     <PopupWithForm
       name='profile'
       title='Редактировать профиль'
-      btn={btn}
+      buttonText='Сохранить'
+      buttonTextLoading='Сохранение...'
+      isLoading={isLoading}
       isOpen={isOpen && 'popup_opened'}
       onClose={onClose}
       onSubmit={handleSubmit}

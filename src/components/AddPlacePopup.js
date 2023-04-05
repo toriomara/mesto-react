@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PopupWithForm } from './PopupWithForm';
 
 export const AddPlacePopup = (props) => {
-  const { isOpen, onClose, onAddPlace, btn } = props;
+  const { isOpen, onClose, onAddPlace, isLoading } = props;
 
   const [name, setName] = useState('');
   const [link, setLink] = useState('');
@@ -21,13 +21,19 @@ export const AddPlacePopup = (props) => {
       name,
       link,
     });
+    // Занулил тут инпуты, но не знаю надо ли (т.е. соответствует ли логике) и правильно ли.
+    // На мой взгляд логично, так как место, в отличие от имени, почти всегда новое
+    setName('');
+    setLink('');
   };
 
   return (
     <PopupWithForm
       name='card'
       title='Новое место'
-      btn={btn}
+      buttonText='Сохранить'
+      buttonTextLoading='Сохранение...'
+      isLoading={isLoading}
       isOpen={isOpen && 'popup_opened'}
       onClose={onClose}
       onSubmit={handleSubmit}
